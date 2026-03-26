@@ -38,6 +38,8 @@ export const colors = {
   shadow: '#000000',
   overlay: 'rgba(0, 0, 0, 0.5)',
   star: '#FFB800',
+  starInactive: '#DDDDDD',
   badge: '#E02020',
   cartBadge: '#E02020',
+  noonYellow: '#FEEE00',
 };

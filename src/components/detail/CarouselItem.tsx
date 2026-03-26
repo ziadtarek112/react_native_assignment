@@ -29,14 +29,16 @@ const CarouselItem = ({ image, index, scrollX }: CarouselItemProps) => {
       Extrapolation.CLAMP,
     );
 
-    const translateX = interpolate(
+    const opacity = interpolate(
       scrollX.value,
       inputRange,
-      [-30, 0, 30],
+      [0.5, 1, 0.5],
       Extrapolation.CLAMP,
     );
+
     return {
-      transform: [{ scale }, { translateX }],
+      transform: [{ scale }],
+      opacity,
     };
   });
   return (

@@ -31,9 +31,11 @@ const ImageCarousel = ({ images }: ImageCarouselProps) => {
     <Animated.FlatList
       showsHorizontalScrollIndicator={false}
       horizontal={true}
+      pagingEnabled={true}
       data={images}
       renderItem={renderItem}
       onScroll={scrollHandler}
+      scrollEventThrottle={16}
     />
   );
 };
