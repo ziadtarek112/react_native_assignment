@@ -1,30 +1,27 @@
-import { StyleSheet, Text, View } from 'react-native';
-import Animated, { FadeInUp } from 'react-native-reanimated';
-import { colors } from '../../utils/colors';
+import {StyleSheet, Text, View} from 'react-native';
+import Animated, {FadeInUp} from 'react-native-reanimated';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {colors} from '../../utils/colors';
+
+const HIGHLIGHTS = [
+  {icon: 'car-outline', text: 'Free delivery'},
+  {icon: 'shield-checkmark-outline', text: 'Genuine product'},
+  {icon: 'refresh-outline', text: 'Easy returns'},
+  {icon: 'ribbon-outline', text: 'Warranty included'},
+];
 
 const Highlights = () => {
   return (
     <Animated.View
       entering={FadeInUp.delay(400).duration(400)}
-      style={styles.highlightsSection}
-    >
+      style={styles.highlightsSection}>
       <Text style={styles.sectionTitle}>Highlights</Text>
-      <View style={styles.highlightRow}>
-        <Text style={styles.highlightIcon}>✓</Text>
-        <Text style={styles.highlightText}>Free delivery</Text>
-      </View>
-      <View style={styles.highlightRow}>
-        <Text style={styles.highlightIcon}>✓</Text>
-        <Text style={styles.highlightText}>Genuine product</Text>
-      </View>
-      <View style={styles.highlightRow}>
-        <Text style={styles.highlightIcon}>✓</Text>
-        <Text style={styles.highlightText}>Easy returns</Text>
-      </View>
-      <View style={styles.highlightRow}>
-        <Text style={styles.highlightIcon}>✓</Text>
-        <Text style={styles.highlightText}>Warranty included</Text>
-      </View>
+      {HIGHLIGHTS.map((item, index) => (
+        <View key={index} style={styles.highlightRow}>
+          <Icon name={item.icon} size={18} color={colors.success} />
+          <Text style={styles.highlightText}>{item.text}</Text>
+        </View>
+      ))}
     </Animated.View>
   );
 };
@@ -48,11 +45,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 10,
     paddingVertical: 6,
-  },
-  highlightIcon: {
-    fontSize: 14,
-    color: colors.success,
-    fontWeight: '700',
   },
   highlightText: {
     fontSize: 14,

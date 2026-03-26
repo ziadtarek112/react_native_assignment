@@ -1,32 +1,41 @@
 import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import GalleryScreen from '../screens/GalleryScreen';
 import ProductDetailScreen from '../screens/ProductDetailScreen';
-import { colors } from '../utils/colors';
-import type { RootStackParamList } from '../types/navigation';
+import {colors} from '../utils/colors';
+import type {RootStackParamList} from '../types/navigation';
+import CartBadge from '../components/common/CartBadge';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
+// at the top-level (outside AppNavigator)
+const renderCartBadge = () => <CartBadge />;
 
+// inside options
 export default function AppNavigator() {
+  
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: colors.background },
+        headerStyle: {backgroundColor: colors.background},
         headerTintColor: colors.textPrimary,
-        headerTitleStyle: { fontWeight: '600' },
+        headerTitleStyle: {fontWeight: '600'},
         headerShadowVisible: false,
-        contentStyle: { backgroundColor: colors.backgroundGrey },
-        animation: 'slide_from_right',
-      }}
-    >
-      <Stack.Screen name="Gallery" options={{ headerShown: false }} component={GalleryScreen} />
+        contentStyle: {backgroundColor: colors.backgroundGrey},
+        animation: 'fade',
+      }}>
+      <Stack.Screen
+        name="Gallery"
+        options={{headerShown: false}}
+        component={GalleryScreen}
+      />
       <Stack.Screen
         name="ProductDetail"
         component={ProductDetailScreen}
-        options={{
-          title: '',
+        options={({route}) => ({
+          title: route.params.product.name,
           headerBackTitle: 'Back',
-        }}
+          headerRight: renderCartBadge,
+        })}
       />
     </Stack.Navigator>
   );

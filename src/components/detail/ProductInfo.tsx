@@ -1,13 +1,14 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { Product } from '../../types/Product';
-import Animated, { FadeInUp } from 'react-native-reanimated';
-import { colors } from '../../utils/colors';
+import {StyleSheet, Text, View} from 'react-native';
+import {Product} from '../../types/Product';
+import Animated, {FadeInUp} from 'react-native-reanimated';
+import {colors} from '../../utils/colors';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 type ProductInfoProps = {
   product: Product;
 };
 
-const ProductInfo = ({ product }: ProductInfoProps) => {
+const ProductInfo = ({product}: ProductInfoProps) => {
   const discount = product.originalPrice
     ? Math.round(
         ((product.originalPrice - product.price) / product.originalPrice) * 100,
@@ -16,8 +17,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
   return (
     <Animated.View
       entering={FadeInUp.delay(100).duration(400)}
-      style={styles.infoSection}
-    >
+      style={styles.infoSection}>
       <View style={styles.categoryRow}>
         <Text style={styles.category}>{product.category}</Text>
         {discount > 0 && (
@@ -45,20 +45,16 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
       <View style={styles.ratingSection}>
         <View style={styles.stars}>
           {[1, 2, 3, 4, 5].map(star => (
-            <Text
+            <Icon
               key={star}
-              style={[
-                styles.star,
-                {
-                  color:
-                    star <= Math.round(product.rating)
-                      ? colors.star
-                      : colors.starInactive,
-                },
-              ]}
-            >
-              ★
-            </Text>
+              name={star <= Math.round(product.rating) ? 'star' : 'star-outline'}
+              size={16}
+              color={
+                star <= Math.round(product.rating)
+                  ? colors.star
+                  : colors.starInactive
+              }
+            />
           ))}
         </View>
         <Text style={styles.ratingText}>{product.rating}</Text>
@@ -135,9 +131,6 @@ const styles = StyleSheet.create({
   stars: {
     flexDirection: 'row',
     gap: 2,
-  },
-  star: {
-    fontSize: 16,
   },
   ratingText: {
     fontSize: 14,

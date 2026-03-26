@@ -11,15 +11,16 @@ export default function GalleryScreen({}: GalleryScreenProps) {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const filteredProducts = useMemo(() => {
+    let filtered = products;
     if (selectedCategory !== 'All') {
-      return products.filter(p => p.category === selectedCategory);
+      filtered = filtered.filter(p => p.category === selectedCategory);
     }
     if (searchQuery.trim() !== '') {
-      return products.filter(p =>
+      filtered = filtered.filter(p =>
         p.name.toLowerCase().includes(searchQuery.toLowerCase()),
       );
     }
-    return products;
+    return filtered;
   }, [searchQuery, selectedCategory]);
   return (
     <View style={styles.container}>

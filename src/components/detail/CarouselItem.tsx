@@ -1,20 +1,21 @@
-import { Dimensions, Image, StyleSheet, View } from 'react-native';
+import {Dimensions, Image, StyleSheet, View} from 'react-native';
 import Animated, {
   Extrapolation,
   interpolate,
   SharedValue,
   useAnimatedStyle,
 } from 'react-native-reanimated';
-import { colors } from '../../utils/colors';
+import {colors} from '../../utils/colors';
 
 type CarouselItemProps = {
   image: string;
   index: number;
   scrollX: SharedValue<number>;
+  productId: string;
 };
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
+const {width: SCREEN_WIDTH} = Dimensions.get('window');
 const IMAGE_WIDTH = SCREEN_WIDTH;
-const CarouselItem = ({ image, index, scrollX }: CarouselItemProps) => {
+const CarouselItem = ({image, index, scrollX, productId}: CarouselItemProps) => {
   const animatedStyle = useAnimatedStyle(() => {
     const inputRange = [
       (index - 1) * IMAGE_WIDTH,
@@ -37,14 +38,22 @@ const CarouselItem = ({ image, index, scrollX }: CarouselItemProps) => {
     );
 
     return {
-      transform: [{ scale }],
+      transform: [{scale}],
       opacity,
     };
   });
   return (
     <View style={styles.imageWrapper}>
       <Animated.View style={[styles.imageInner, animatedStyle]}>
-        <Image source={{ uri: image }} style={styles.image} />
+        {index === 0 ? (
+          <Animated.Image
+            source={{uri: image}}
+            style={styles.image}
+            sharedTransitionTag={`product-image-${productId}`}
+          />
+        ) : (
+          <Image source={{uri: image}} style={styles.image} />
+        )}
       </Animated.View>
     </View>
   );
@@ -60,7 +69,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.card,
   },
-  imageInner: { width: '100%', height: '100%' },
+  imageInner: {width: '100%', height: '100%'},
   image: {
     width: '100%',
     height: '100%',

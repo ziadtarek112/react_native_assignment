@@ -1,21 +1,27 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native';
-import { colors } from '../../utils/colors';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import {StyleSheet, Text, TextInput, View} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {colors} from '../../utils/colors';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import CartBadge from '../common/CartBadge';
 
 type HeaderProps = {
   searchQuery: string;
   setSearchQuery: (text: string) => void;
 };
-const Header = ({ searchQuery, setSearchQuery }: HeaderProps) => {
-  //safe area view
+const Header = ({searchQuery, setSearchQuery}: HeaderProps) => {
   const insets = useSafeAreaInsets();
   return (
-    <View style={[styles.container, { paddingTop: insets.top }]}>
+    <View style={[styles.container, {paddingTop: insets.top}]}>
       <View style={styles.header}>
-        <View style={styles.logoContainer}>
-          <Text style={styles.logoNoon}>noon</Text>
+        <View style={styles.topRow}>
+          <View style={styles.spacer} />
+          <View style={styles.logoContainer}>
+            <Text style={styles.logoNoon}>noon</Text>
+          </View>
+          <CartBadge />
         </View>
         <View style={styles.searchBar}>
+          <Icon name="search-outline" size={18} color={colors.textMuted} />
           <TextInput
             style={styles.searchInput}
             placeholderTextColor={colors.textMuted}
@@ -32,7 +38,6 @@ const Header = ({ searchQuery, setSearchQuery }: HeaderProps) => {
 export default Header;
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
     backgroundColor: colors.backgroundGrey,
   },
   header: {
@@ -41,9 +46,17 @@ const styles = StyleSheet.create({
     paddingBottom: 12,
     paddingTop: 8,
   },
+  topRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 8,
+  },
+  spacer: {
+    width: 40,
+  },
   logoContainer: {
     alignItems: 'center',
-    marginBottom: 8,
   },
   logoNoon: {
     fontSize: 28,
@@ -54,21 +67,16 @@ const styles = StyleSheet.create({
   searchBar: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: colors.background,
     borderRadius: 8,
     paddingHorizontal: 12,
     height: 40,
+    gap: 8,
   },
   searchInput: {
     flex: 1,
     height: '100%',
-    borderRadius: 8,
-    paddingHorizontal: 12,
     fontSize: 16,
     color: colors.textPrimary,
-  },
-  searchIcon: {
-    fontSize: 16,
-    marginRight: 8,
   },
 });
