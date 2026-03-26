@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import type { GalleryScreenProps } from '../types/navigation';
 import { products } from '../data/Products';
 import Header from '../components/gallery/Header';
@@ -10,11 +10,22 @@ const CATEGORIES = ['All', ...new Set(products.map(p => p.category))];
 export default function GalleryScreen({}: GalleryScreenProps) {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
+  const filteredProducts = useMemo(() => {
+    if (selectedCategory !== 'All') {
+      return products.filter(p => p.category === selectedCategory);
+    }
+    if (searchQuery.trim() !== '') {
+      return products.filter(p =>
+        p.name.toLowerCase().includes(searchQuery.toLowerCase()),
+      );
+    }
+    return products;
+  }, [searchQuery, selectedCategory]);
   return (
     <View style={styles.container}>
       <Header searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <Products
-        products={products}
+        products={filteredProducts}
         categories={CATEGORIES}
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
