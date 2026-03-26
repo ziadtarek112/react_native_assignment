@@ -1,13 +1,16 @@
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {Dimensions, Pressable, StyleSheet, Text, View} from 'react-native';
 import {Product} from '../../types/Product';
 import {colors} from '../../utils/colors';
 import Animated from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/Ionicons';
-
+const {width: SCREEN_WIDTH} = Dimensions.get('window');
+// grid paddingHorizontal: 8 each side = 16, card margin: 4 each side × 2 cards = 16
+const CARD_WIDTH = (SCREEN_WIDTH - 32) / 2;
 type ProductCardProps = {
   product: Product;
   onPress: () => void;
 };
+
 const ProductCard = ({product, onPress}: ProductCardProps) => {
   const discount = product.originalPrice
     ? Math.round(
@@ -61,6 +64,7 @@ export default ProductCard;
 const styles = StyleSheet.create({
   card: {
     flex: 1,
+    maxWidth: CARD_WIDTH,
     backgroundColor: colors.card,
     borderRadius: 12,
     margin: 4,
