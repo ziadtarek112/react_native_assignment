@@ -1,10 +1,11 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Product } from '../../types/Product';
 
 type ProductCardProps = {
   product: Product;
+  onPress: () => void;
 };
-const ProductCard = ({ product }: ProductCardProps) => {
+const ProductCard = ({ product, onPress }: ProductCardProps) => {
   const discount = product.originalPrice
     ? Math.round(
         ((product.originalPrice - product.price) / product.originalPrice) * 100,
@@ -12,7 +13,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
     : 0;
   const hasDiscount = discount > 0;
   return (
-    <View style={styles.card}>
+    <Pressable onPress={onPress} style={styles.card}>
       <View style={styles.imageContainer}>
         <Image source={{ uri: product.images[0] }} style={styles.image} />
       </View>
@@ -44,7 +45,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           <Text style={styles.expressLabel}> Express</Text>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

@@ -1,35 +1,71 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import type { ProductDetailScreenProps } from '../types/navigation';
-import ImageCarousel from '../components/detail/ImageCarousel';
-import ProductInfo from '../components/detail/ProductInfo';
-import Delivery from '../components/detail/Delivery';
-import Description from '../components/detail/Description';
-import Highlights from '../components/detail/Highlights';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { StyleSheet, Text, View } from 'react-native';
+import { Product } from '../../types/Product';
+import Animated, { FadeInUp } from 'react-native-reanimated';
 
-export default function ProductDetailScreen({
-  route,
-}: ProductDetailScreenProps) {
-  const { product } = route.params;
-  const insets = useSafeAreaInsets();
+type ProductInfoProps = {
+  product: Product;
+};
+
+const ProductInfo = ({ product }: ProductInfoProps) => {
+  const discount = product.originalPrice
+    ? Math.round(
+        ((product.originalPrice - product.price) / product.originalPrice) * 100,
+      )
+    : 0;
   return (
-    <View style={styles.container}>
-      <Text style={styles.headerTitle}>{product.name}</Text>
-      <ScrollView
-        bounces={true}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 100 + insets.bottom }}
-      >
-        <ImageCarousel images={product.images} />
-        <ProductInfo product={product} />
-        <Delivery />
-        <Description product={product} />
-        <Highlights />
-      </ScrollView>
-    </View>
+    <Animated.View
+      entering={FadeInUp.delay(100).duration(400)}
+      style={styles.infoSection}
+    >
+      <View style={styles.categoryRow}>
+        <Text style={styles.category}>{product.category}</Text>
+        {discount > 0 && (
+          <View style={styles.discountTag}>
+            <Text style={styles.discountTagText}>{discount}% OFF</Text>
+          </View>
+        )}
+      </View>
+
+      <Text style={styles.productName}>{product.name}</Text>
+
+      <View style={styles.priceSection}>
+        <Text style={styles.price}>AED {product.price}</Text>
+        {product.originalPrice && (
+          <Text style={styles.originalPrice}>AED {product.originalPrice}</Text>
+        )}
+      </View>
+
+      {product.originalPrice && (
+        <Text style={styles.saveText}>
+          You save AED {product.originalPrice - product.price}
+        </Text>
+      )}
+
+      <View style={styles.ratingSection}>
+        <View style={styles.stars}>
+          {[1, 2, 3, 4, 5].map(star => (
+            <Text
+              key={star}
+              style={[
+                styles.star,
+                {
+                  color:
+                    star <= Math.round(product.rating) ? '#f5a623' : '#ddd',
+                },
+              ]}
+            >
+              ★
+            </Text>
+          ))}
+        </View>
+        <Text style={styles.ratingText}>{product.rating}</Text>
+        <Text style={styles.reviewCount}>({product.reviewCount} reviews)</Text>
+      </View>
+    </Animated.View>
   );
-}
+};
+
+export default ProductInfo;
 
 const styles = StyleSheet.create({
   container: {

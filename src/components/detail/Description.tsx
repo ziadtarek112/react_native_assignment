@@ -1,36 +1,23 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import type { ProductDetailScreenProps } from '../types/navigation';
-import ImageCarousel from '../components/detail/ImageCarousel';
-import ProductInfo from '../components/detail/ProductInfo';
-import Delivery from '../components/detail/Delivery';
-import Description from '../components/detail/Description';
-import Highlights from '../components/detail/Highlights';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { StyleSheet, Text } from 'react-native';
+import Animated, { FadeInUp } from 'react-native-reanimated';
+import { Product } from '../../types/Product';
+type DescriptionProps = {
+  product: Product;
+};
 
-export default function ProductDetailScreen({
-  route,
-}: ProductDetailScreenProps) {
-  const { product } = route.params;
-  const insets = useSafeAreaInsets();
+const Description = ({ product }: DescriptionProps) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.headerTitle}>{product.name}</Text>
-      <ScrollView
-        bounces={true}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 100 + insets.bottom }}
-      >
-        <ImageCarousel images={product.images} />
-        <ProductInfo product={product} />
-        <Delivery />
-        <Description product={product} />
-        <Highlights />
-      </ScrollView>
-    </View>
+    <Animated.View
+      entering={FadeInUp.delay(300).duration(400)}
+      style={styles.descriptionSection}
+    >
+      <Text style={styles.sectionTitle}>Description</Text>
+      <Text style={styles.description}>{product.description}</Text>
+    </Animated.View>
   );
-}
+};
 
+export default Description;
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -1,36 +1,34 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import type { ProductDetailScreenProps } from '../types/navigation';
-import ImageCarousel from '../components/detail/ImageCarousel';
-import ProductInfo from '../components/detail/ProductInfo';
-import Delivery from '../components/detail/Delivery';
-import Description from '../components/detail/Description';
-import Highlights from '../components/detail/Highlights';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { StyleSheet, Text, View } from 'react-native';
+import Animated, { FadeInUp } from 'react-native-reanimated';
 
-export default function ProductDetailScreen({
-  route,
-}: ProductDetailScreenProps) {
-  const { product } = route.params;
-  const insets = useSafeAreaInsets();
+const Highlights = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.headerTitle}>{product.name}</Text>
-      <ScrollView
-        bounces={true}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 100 + insets.bottom }}
-      >
-        <ImageCarousel images={product.images} />
-        <ProductInfo product={product} />
-        <Delivery />
-        <Description product={product} />
-        <Highlights />
-      </ScrollView>
-    </View>
+    <Animated.View
+      entering={FadeInUp.delay(400).duration(400)}
+      style={styles.highlightsSection}
+    >
+      <Text style={styles.sectionTitle}>Highlights</Text>
+      <View style={styles.highlightRow}>
+        <Text style={styles.highlightIcon}>✓</Text>
+        <Text style={styles.highlightText}>Free delivery</Text>
+      </View>
+      <View style={styles.highlightRow}>
+        <Text style={styles.highlightIcon}>✓</Text>
+        <Text style={styles.highlightText}>Genuine product</Text>
+      </View>
+      <View style={styles.highlightRow}>
+        <Text style={styles.highlightIcon}>✓</Text>
+        <Text style={styles.highlightText}>Easy returns</Text>
+      </View>
+      <View style={styles.highlightRow}>
+        <Text style={styles.highlightIcon}>✓</Text>
+        <Text style={styles.highlightText}>Warranty included</Text>
+      </View>
+    </Animated.View>
   );
-}
+};
 
+export default Highlights;
 const styles = StyleSheet.create({
   container: {
     flex: 1,

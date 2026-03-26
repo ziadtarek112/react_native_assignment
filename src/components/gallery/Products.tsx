@@ -2,6 +2,8 @@ import { FlatList, StyleSheet } from 'react-native';
 import { Product } from '../../types/Product';
 import ProductCard from './ProductCard';
 import Categories from './Categories';
+import { useNavigation } from '@react-navigation/native';
+import { ProductDetailScreenProps } from '../../types/navigation';
 
 type ProductsProps = {
   products: Product[];
@@ -16,8 +18,14 @@ const Products = ({
   selectedCategory,
   setSelectedCategory,
 }: ProductsProps) => {
+  const navigation = useNavigation<ProductDetailScreenProps['navigation']>();
   const renderProductItem = ({ item }: { item: Product }) => {
-    return <ProductCard product={item} />;
+    return (
+      <ProductCard
+        product={item}
+        onPress={() => navigation.navigate('ProductDetail', { product: item })}
+      />
+    );
   };
   const keyExtractor = (item: Product) => item.id;
   return (

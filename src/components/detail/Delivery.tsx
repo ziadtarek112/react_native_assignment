@@ -1,35 +1,27 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import type { ProductDetailScreenProps } from '../types/navigation';
-import ImageCarousel from '../components/detail/ImageCarousel';
-import ProductInfo from '../components/detail/ProductInfo';
-import Delivery from '../components/detail/Delivery';
-import Description from '../components/detail/Description';
-import Highlights from '../components/detail/Highlights';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { StyleSheet, Text, View } from 'react-native';
+import Animated, { FadeInUp } from 'react-native-reanimated';
 
-export default function ProductDetailScreen({
-  route,
-}: ProductDetailScreenProps) {
-  const { product } = route.params;
-  const insets = useSafeAreaInsets();
+const Delivery = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.headerTitle}>{product.name}</Text>
-      <ScrollView
-        bounces={true}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 100 + insets.bottom }}
-      >
-        <ImageCarousel images={product.images} />
-        <ProductInfo product={product} />
-        <Delivery />
-        <Description product={product} />
-        <Highlights />
-      </ScrollView>
-    </View>
+    <Animated.View
+      entering={FadeInUp.delay(200).duration(400)}
+      style={styles.deliverySection}
+    >
+      <View style={styles.expressRow}>
+        <View style={styles.noonExpressBadge}>
+          <Text style={styles.noonExpressText}>noon</Text>
+        </View>
+        <Text style={styles.expressLabel}>Express</Text>
+      </View>
+      <Text style={styles.deliveryText}>
+        Get it by <Text style={styles.deliveryBold}>Tomorrow</Text>
+      </Text>
+      <Text style={styles.deliverySubtext}>Order within 4 hrs 23 mins</Text>
+    </Animated.View>
   );
-}
+};
+
+export default Delivery;
 
 const styles = StyleSheet.create({
   container: {
