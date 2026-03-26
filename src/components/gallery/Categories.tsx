@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.backgroundGrey,
   },
   categoryItemActive: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.secondary,
   },
 
   categoryItemText: {
@@ -70,6 +70,6 @@ const styles = StyleSheet.create({
     color: colors.textPrimary,
   },
   categoryItemTextActive: {
-    color: colors.textOnPrimary,
+    color: colors.textOnSecondary,
   },
 });

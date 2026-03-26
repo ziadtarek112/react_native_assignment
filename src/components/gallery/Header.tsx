@@ -1,26 +1,29 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { colors } from '../../utils/colors';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type HeaderProps = {
   searchQuery: string;
   setSearchQuery: (text: string) => void;
 };
 const Header = ({ searchQuery, setSearchQuery }: HeaderProps) => {
+  //safe area view
+  const insets = useSafeAreaInsets();
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { paddingTop: insets.top }]}>
       <View style={styles.header}>
         <View style={styles.logoContainer}>
           <Text style={styles.logoNoon}>noon</Text>
         </View>
-      </View>
-      <View style={styles.searchBar}>
-        <TextInput
-          style={styles.searchInput}
-          placeholderTextColor={colors.textMuted}
-          value={searchQuery}
-          onChangeText={setSearchQuery}
-          placeholder="Search"
-        />
+        <View style={styles.searchBar}>
+          <TextInput
+            style={styles.searchInput}
+            placeholderTextColor={colors.textMuted}
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+            placeholder="Search"
+          />
+        </View>
       </View>
     </View>
   );
@@ -29,7 +32,7 @@ const Header = ({ searchQuery, setSearchQuery }: HeaderProps) => {
 export default Header;
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: colors.backgroundGrey,
   },
   header: {

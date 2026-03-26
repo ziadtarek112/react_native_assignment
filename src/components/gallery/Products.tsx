@@ -1,4 +1,4 @@
-import { FlatList, View } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import { Product } from '../../types/Product';
 import ProductCard from './ProductCard';
 import Categories from './Categories';
@@ -21,9 +21,15 @@ const Products = ({
   };
   const keyExtractor = (item: Product) => item.id;
   return (
-    <View>
+    <>
       <FlatList
+        contentContainerStyle={styles.grid}
+        numColumns={2}
         data={products}
+        removeClippedSubviews={true}
+        maxToRenderPerBatch={8}
+        windowSize={5}
+        initialNumToRender={6}
         ListHeaderComponent={
           <Categories
             categories={categories}
@@ -34,8 +40,15 @@ const Products = ({
         renderItem={renderProductItem}
         keyExtractor={keyExtractor}
       />
-    </View>
+    </>
   );
 };
 
 export default Products;
+
+const styles = StyleSheet.create({
+  grid: {
+    paddingHorizontal: 8,
+    paddingBottom: 20,
+  },
+});
