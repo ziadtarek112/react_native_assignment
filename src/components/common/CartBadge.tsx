@@ -31,7 +31,7 @@ const CartBadge = () => {
 
   return (
     <Animated.View style={[styles.container, animatedStyle]}>
-      <Icon name="cart-outline" size={24} color={colors.textPrimary} />
+      <Icon name="bag-handle-outline" size={24} color={colors.textPrimary} />
       {cartCount > 0 && (
         <View style={styles.badge}>
           <Text style={styles.badgeText}>{cartCount}</Text>
@@ -61,10 +61,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 4,
+    borderWidth: 2,
+    borderColor: colors.background,
   },
   badgeText: {
     color: colors.textOnSecondary,
     fontSize: 10,
-    fontWeight: '700',
+    fontWeight: '800',
   },
 });

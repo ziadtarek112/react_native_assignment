@@ -1,5 +1,5 @@
-import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
-import { colors } from '../../utils/colors';
+import {FlatList, Pressable, StyleSheet, Text, View} from 'react-native';
+import {colors} from '../../utils/colors';
 
 type CategoriesProps = {
   categories: string[];
@@ -11,21 +11,17 @@ const Categories = ({
   selectedCategory,
   setSelectedCategory,
 }: CategoriesProps) => {
-  const renderCategoryItem = ({ item }: { item: string }) => {
+  const renderCategoryItem = ({item}: {item: string}) => {
+    const isActive = selectedCategory === item;
     return (
       <Pressable
-        style={[
-          styles.categoryItem,
-          selectedCategory === item && styles.categoryItemActive,
-        ]}
-        onPress={() => setSelectedCategory(item)}
-      >
+        style={[styles.categoryItem, isActive && styles.categoryItemActive]}
+        onPress={() => setSelectedCategory(item)}>
         <Text
           style={[
             styles.categoryItemText,
-            selectedCategory === item && styles.categoryItemTextActive,
-          ]}
-        >
+            isActive && styles.categoryItemTextActive,
+          ]}>
           {item}
         </Text>
       </Pressable>
@@ -52,22 +48,26 @@ export default Categories;
 const styles = StyleSheet.create({
   categoriesContainer: {
     paddingHorizontal: 12,
-    paddingVertical: 12,
+    paddingVertical: 14,
     gap: 8,
   },
   categoryItem: {
-    padding: 12,
-    borderRadius: 8,
-    backgroundColor: colors.backgroundGrey,
+    paddingHorizontal: 18,
+    paddingVertical: 10,
+    borderRadius: 24,
+    backgroundColor: colors.background,
+    borderWidth: 1.5,
+    borderColor: colors.border,
   },
   categoryItemActive: {
     backgroundColor: colors.secondary,
+    borderColor: colors.secondary,
   },
-
   categoryItemText: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '600',
-    color: colors.textPrimary,
+    color: colors.textSecondary,
+    letterSpacing: 0.2,
   },
   categoryItemTextActive: {
     color: colors.textOnSecondary,

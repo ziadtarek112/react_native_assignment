@@ -1,45 +1,50 @@
 export const colors = {
   // Primary
-  primary: '#FFD700',        // Noon signature yellow
-  primaryDark: '#F5C400',
-  primaryLight: '#FFEC80',
+  primary: '#FFD700',
+  primaryDark: '#F0C000',
+  primaryLight: '#FFF3B0',
 
   // Secondary
-  secondary: '#3866DF',      // Noon blue
-  secondaryDark: '#2A4FAF',
-  secondaryLight: '#6B8FEB',
+  secondary: '#1A3C6E',
+  secondaryDark: '#0F2847',
+  secondaryLight: '#4A6FA5',
 
   // Backgrounds
   background: '#FFFFFF',
-  backgroundGrey: '#F4F4F4',
+  backgroundGrey: '#F7F8FA',
   surface: '#FFFFFF',
   card: '#FFFFFF',
 
   // Text
-  textPrimary: '#222222',
-  textSecondary: '#6B6B6B',
-  textMuted: '#9E9E9E',
-  textOnPrimary: '#222222',
+  textPrimary: '#1A1D26',
+  textSecondary: '#5A6177',
+  textMuted: '#9CA3B4',
+  textOnPrimary: '#1A1D26',
   textOnSecondary: '#FFFFFF',
-  textPrice: '#222222',
-  textDiscount: '#38AE04',
+  textPrice: '#1A1D26',
+  textDiscount: '#2EAD4B',
 
   // Accents
-  success: '#38AE04',
-  error: '#E02020',
-  warning: '#FF9800',
-  info: '#3866DF',
+  success: '#2EAD4B',
+  error: '#E5384F',
+  warning: '#F5A623',
+  info: '#3B7DED',
 
   // Borders & Dividers
-  border: '#E8E8E8',
-  divider: '#F0F0F0',
+  border: '#EBEDF2',
+  divider: '#F0F1F5',
 
   // Misc
-  shadow: '#000000',
-  overlay: 'rgba(0, 0, 0, 0.5)',
-  star: '#FFB800',
-  starInactive: '#DDDDDD',
-  badge: '#E02020',
-  cartBadge: '#E02020',
+  shadow: '#0F1729',
+  overlay: 'rgba(15, 23, 41, 0.45)',
+  star: '#F5A623',
+  starInactive: '#E0E2E9',
+  badge: '#E5384F',
+  cartBadge: '#E5384F',
   noonYellow: '#FEEE00',
+
+  // New design tokens
+  cardBorder: '#EBEDF2',
+  accent: '#3B7DED',
+  subtleBg: '#F0F2F7',
 };

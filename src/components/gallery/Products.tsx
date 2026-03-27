@@ -1,9 +1,9 @@
-import { FlatList, StyleSheet } from 'react-native';
-import { Product } from '../../types/Product';
+import {FlatList, StyleSheet} from 'react-native';
+import {Product} from '../../types/Product';
 import ProductCard from './ProductCard';
 import Categories from './Categories';
-import { useNavigation } from '@react-navigation/native';
-import { ProductDetailScreenProps } from '../../types/navigation';
+import {useNavigation} from '@react-navigation/native';
+import {ProductDetailScreenProps} from '../../types/navigation';
 
 type ProductsProps = {
   products: Product[];
@@ -19,11 +19,11 @@ const Products = ({
   setSelectedCategory,
 }: ProductsProps) => {
   const navigation = useNavigation<ProductDetailScreenProps['navigation']>();
-  const renderProductItem = ({ item }: { item: Product }) => {
+  const renderProductItem = ({item}: {item: Product}) => {
     return (
       <ProductCard
         product={item}
-        onPress={() => navigation.navigate('ProductDetail', { product: item })}
+        onPress={() => navigation.navigate('ProductDetail', {product: item})}
       />
     );
   };
@@ -56,7 +56,7 @@ export default Products;
 
 const styles = StyleSheet.create({
   grid: {
-    paddingHorizontal: 8,
+    paddingHorizontal: 6,
     paddingBottom: 20,
   },
 });

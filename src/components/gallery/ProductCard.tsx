@@ -4,8 +4,8 @@ import {colors} from '../../utils/colors';
 import Animated from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/Ionicons';
 const {width: SCREEN_WIDTH} = Dimensions.get('window');
-// grid paddingHorizontal: 8 each side = 16, card margin: 4 each side × 2 cards = 16
 const CARD_WIDTH = (SCREEN_WIDTH - 32) / 2;
+
 type ProductCardProps = {
   product: Product;
   onPress: () => void;
@@ -26,14 +26,13 @@ const ProductCard = ({product, onPress}: ProductCardProps) => {
           style={styles.image}
           sharedTransitionTag={`product-image-${product.id}`}
         />
+        {hasDiscount && (
+          <View style={styles.discountBadge}>
+            <Text style={styles.discountText}>-{discount}%</Text>
+          </View>
+        )}
       </View>
-      {hasDiscount && (
-        <View style={styles.discountBadge}>
-          <Text style={styles.discountText}>{discount}%</Text>
-        </View>
-      )}
       <View style={styles.info}>
-        <Text style={styles.category}>{product.category}</Text>
         <Text style={styles.name} numberOfLines={2}>
           {product.name}
         </Text>
@@ -45,14 +44,16 @@ const ProductCard = ({product, onPress}: ProductCardProps) => {
             </Text>
           )}
         </View>
-        <View style={styles.ratingRow}>
-          <Icon name="star" size={12} color={colors.star} />
-          <Text style={styles.rating}>{product.rating}</Text>
-          <Text style={styles.reviewCount}>({product.reviewCount})</Text>
-        </View>
-        <View style={styles.expressTag}>
-          <Text style={styles.expressText}>noon</Text>
-          <Text style={styles.expressLabel}> Express</Text>
+        <View style={styles.bottomRow}>
+          <View style={styles.ratingRow}>
+            <Icon name="star" size={11} color={colors.star} />
+            <Text style={styles.rating}>{product.rating}</Text>
+            <Text style={styles.reviewCount}>({product.reviewCount})</Text>
+          </View>
+          <View style={styles.expressTag}>
+            <Text style={styles.expressText}>noon</Text>
+            <Text style={styles.expressLabel}> Express</Text>
+          </View>
         </View>
       </View>
     </Pressable>
@@ -66,83 +67,87 @@ const styles = StyleSheet.create({
     flex: 1,
     maxWidth: CARD_WIDTH,
     backgroundColor: colors.card,
-    borderRadius: 12,
-    margin: 4,
+    borderRadius: 16,
+    margin: 5,
     overflow: 'hidden',
-    elevation: 2,
+    borderWidth: 1,
+    borderColor: colors.cardBorder,
     shadowColor: colors.shadow,
-    shadowOffset: {width: 0, height: 1},
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    shadowOffset: {width: 0, height: 4},
+    shadowOpacity: 0.06,
+    shadowRadius: 12,
+    elevation: 3,
   },
   imageContainer: {
     aspectRatio: 1,
-    backgroundColor: colors.backgroundGrey,
+    backgroundColor: colors.subtleBg,
     position: 'relative',
   },
   image: {
     width: '100%',
     height: '100%',
+    resizeMode: 'contain',
   },
   discountBadge: {
     position: 'absolute',
-    top: 8,
-    left: 8,
+    top: 10,
+    left: 10,
     backgroundColor: colors.error,
-    borderRadius: 4,
-    paddingHorizontal: 6,
-    paddingVertical: 2,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
   },
   discountText: {
     color: colors.textOnSecondary,
-    fontSize: 10,
-    fontWeight: '700',
+    fontSize: 11,
+    fontWeight: '800',
+    letterSpacing: 0.3,
   },
   info: {
-    padding: 8,
-  },
-  category: {
-    fontSize: 10,
-    color: colors.textMuted,
-    textTransform: 'uppercase',
-    marginBottom: 2,
+    padding: 10,
+    gap: 6,
   },
   name: {
     fontSize: 13,
-    fontWeight: '500',
+    fontWeight: '600',
     color: colors.textPrimary,
     lineHeight: 18,
-    marginBottom: 4,
+    letterSpacing: 0.1,
   },
   priceRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
-    marginBottom: 4,
   },
   price: {
-    fontSize: 15,
-    fontWeight: '700',
+    fontSize: 16,
+    fontWeight: '800',
     color: colors.textPrice,
+    letterSpacing: -0.3,
   },
   originalPrice: {
     fontSize: 12,
     color: colors.textMuted,
     textDecorationLine: 'line-through',
   },
+  bottomRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 2,
+  },
   ratingRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 2,
-    marginBottom: 6,
+    gap: 3,
   },
   rating: {
     fontSize: 11,
     color: colors.textPrimary,
-    fontWeight: '600',
+    fontWeight: '700',
   },
   reviewCount: {
-    fontSize: 11,
+    fontSize: 10,
     color: colors.textMuted,
   },
   expressTag: {
@@ -150,18 +155,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   expressText: {
-    fontSize: 11,
+    fontSize: 10,
     fontWeight: '800',
     color: colors.noonYellow,
     backgroundColor: colors.secondary,
-    paddingHorizontal: 4,
-    paddingVertical: 1,
-    borderRadius: 2,
+    paddingHorizontal: 5,
+    paddingVertical: 2,
+    borderRadius: 4,
     overflow: 'hidden',
   },
   expressLabel: {
-    fontSize: 11,
+    fontSize: 10,
     color: colors.secondary,
-    fontWeight: '600',
+    fontWeight: '700',
   },
 });

@@ -39,17 +39,14 @@ const AddToCart = ({product, onFly}: AddToCartProps) => {
   const handleAddToCart = () => {
     addToCart(product);
 
-    // Trigger flying image
     onFly?.();
 
-    // Button bounce
     buttonScale.value = withSequence(
       withSpring(0.9, {damping: 4, stiffness: 400}),
       withSpring(1.08, {damping: 4, stiffness: 400}),
       withSpring(1, {damping: 8, stiffness: 300}),
     );
 
-    // Checkmark flash
     checkOpacity.value = withSequence(
       withSpring(1, {damping: 6, stiffness: 300}),
       withTiming(1, {duration: 1000}),
@@ -100,16 +97,16 @@ const styles = StyleSheet.create({
     right: 0,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingTop: 12,
+    paddingHorizontal: 20,
+    paddingTop: 16,
     backgroundColor: colors.background,
-    borderTopWidth: 1,
-    borderTopColor: colors.divider,
-    elevation: 8,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
     shadowColor: colors.shadow,
-    shadowOffset: {width: 0, height: -2},
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
+    shadowOffset: {width: 0, height: -4},
+    shadowOpacity: 0.08,
+    shadowRadius: 16,
+    elevation: 12,
   },
   bottomPrice: {
     flex: 1,
@@ -117,19 +114,23 @@ const styles = StyleSheet.create({
   bottomPriceLabel: {
     fontSize: 12,
     color: colors.textMuted,
+    fontWeight: '500',
+    letterSpacing: 0.3,
   },
   bottomPriceValue: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: '800',
     color: colors.textPrimary,
+    letterSpacing: -0.5,
+    marginTop: 2,
   },
   addToCartWrapper: {
     flex: 1,
   },
   addToCartButton: {
     backgroundColor: colors.secondary,
-    borderRadius: 10,
-    paddingVertical: 14,
+    borderRadius: 14,
+    paddingVertical: 16,
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
@@ -142,6 +143,7 @@ const styles = StyleSheet.create({
     color: colors.textOnSecondary,
     fontSize: 16,
     fontWeight: '700',
+    letterSpacing: 0.2,
   },
   checkMark: {
     position: 'absolute',

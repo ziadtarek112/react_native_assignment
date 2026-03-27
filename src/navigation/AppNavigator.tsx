@@ -7,18 +7,15 @@ import type {RootStackParamList} from '../types/navigation';
 import CartBadge from '../components/common/CartBadge';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-// at the top-level (outside AppNavigator)
 const renderCartBadge = () => <CartBadge />;
 
-// inside options
 export default function AppNavigator() {
-  
   return (
     <Stack.Navigator
       screenOptions={{
         headerStyle: {backgroundColor: colors.background},
         headerTintColor: colors.textPrimary,
-        headerTitleStyle: {fontWeight: '600'},
+        headerTitleStyle: {fontWeight: '700', fontSize: 16},
         headerShadowVisible: false,
         contentStyle: {backgroundColor: colors.backgroundGrey},
         animation: 'fade',

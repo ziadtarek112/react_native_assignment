@@ -1,23 +1,30 @@
-import { StyleSheet, Text, View } from 'react-native';
-import Animated, { FadeInUp } from 'react-native-reanimated';
-import { colors } from '../../utils/colors';
+import {StyleSheet, Text, View} from 'react-native';
+import Animated, {FadeInUp} from 'react-native-reanimated';
+import {colors} from '../../utils/colors';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const Delivery = () => {
   return (
     <Animated.View
       entering={FadeInUp.delay(200).duration(400)}
-      style={styles.deliverySection}
-    >
-      <View style={styles.expressRow}>
-        <View style={styles.noonExpressBadge}>
-          <Text style={styles.noonExpressText}>noon</Text>
+      style={styles.deliverySection}>
+      <View style={styles.topRow}>
+        <View style={styles.iconContainer}>
+          <Icon name="flash" size={18} color={colors.noonYellow} />
         </View>
-        <Text style={styles.expressLabel}>Express</Text>
+        <View style={styles.expressRow}>
+          <View style={styles.noonExpressBadge}>
+            <Text style={styles.noonExpressText}>noon</Text>
+          </View>
+          <Text style={styles.expressLabel}>Express</Text>
+        </View>
       </View>
-      <Text style={styles.deliveryText}>
-        Get it by <Text style={styles.deliveryBold}>Tomorrow</Text>
-      </Text>
-      <Text style={styles.deliverySubtext}>Order within 4 hrs 23 mins</Text>
+      <View style={styles.deliveryInfo}>
+        <Text style={styles.deliveryText}>
+          Get it by <Text style={styles.deliveryBold}>Tomorrow</Text>
+        </Text>
+        <Text style={styles.deliverySubtext}>Order within 4 hrs 23 mins</Text>
+      </View>
     </Animated.View>
   );
 };
@@ -26,24 +33,38 @@ export default Delivery;
 
 const styles = StyleSheet.create({
   deliverySection: {
+    marginHorizontal: 16,
+    marginTop: 12,
     padding: 16,
-    marginTop: 8,
     backgroundColor: colors.background,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: colors.divider,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: colors.border,
+  },
+  topRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    marginBottom: 10,
+  },
+  iconContainer: {
+    width: 34,
+    height: 34,
+    borderRadius: 10,
+    backgroundColor: colors.secondary,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   expressRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
-    marginBottom: 6,
   },
   noonExpressBadge: {
     backgroundColor: colors.secondary,
-    borderRadius: 3,
-    paddingHorizontal: 6,
-    paddingVertical: 2,
+    borderRadius: 5,
+    paddingHorizontal: 7,
+    paddingVertical: 3,
   },
   noonExpressText: {
     color: colors.noonYellow,
@@ -55,17 +76,21 @@ const styles = StyleSheet.create({
     color: colors.secondary,
     fontWeight: '700',
   },
+  deliveryInfo: {
+    paddingLeft: 44,
+  },
   deliveryText: {
-    fontSize: 14,
+    fontSize: 15,
     color: colors.textPrimary,
+    fontWeight: '500',
   },
   deliveryBold: {
-    fontWeight: '700',
+    fontWeight: '800',
     color: colors.success,
   },
   deliverySubtext: {
     fontSize: 12,
     color: colors.textMuted,
-    marginTop: 2,
+    marginTop: 3,
   },
 });

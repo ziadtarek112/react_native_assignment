@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     height: IMAGE_WIDTH * 0.85,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.card,
+    backgroundColor: colors.background,
   },
   imageInner: {width: '100%', height: '100%'},
   image: {

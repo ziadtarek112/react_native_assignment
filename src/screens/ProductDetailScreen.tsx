@@ -30,7 +30,6 @@ export default function ProductDetailScreen({
   const insets = useSafeAreaInsets();
   const flyingRef = useRef<FlyingImageHandle>(null);
 
-  // Start from near the bottom bar, end near the header cart badge
   const startY = SCREEN_HEIGHT - 140 - insets.bottom;
   const endY = insets.top + 8;
 
@@ -106,10 +105,11 @@ export default function ProductDetailScreen({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: colors.backgroundGrey,
   },
   contentContainer: {
-    backgroundColor: colors.background,
+    backgroundColor: colors.backgroundGrey,
     zIndex: 1,
+    paddingBottom: 12,
   },
 });
