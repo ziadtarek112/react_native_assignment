@@ -2,6 +2,18 @@
 
 A highly polished React Native product gallery and detail screen featuring smooth animations, shared element transitions, and optimized performance.
 
+## Demo
+
+<p align="center">
+  <img src="screenshots/gallery.png" alt="Product Gallery" width="300" />
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="screenshots/product-detail.png" alt="Product Detail" width="300" />
+</p>
+
+| Gallery Screen | Product Detail Screen |
+|:-:|:-:|
+| Browse products in a 2-column grid with search and category filters | View product details with image carousel, pricing, and add-to-cart |
+
 ## Technical Stack
 
 | Technology | Version | Purpose |
